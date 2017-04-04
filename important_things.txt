@@ -1,0 +1,27 @@
+
+
+
+GetOperaWand
+	Things regariding how opera stores passowrds
+	http://securityxploded.com/operapasswordsecrets.php
+
+
+Can run as daemon
+
+The malware can handles 255 uploads / downloads concurrently.
+
+
+
+
+Trivia
+
+	- For whatever reason, 'cp*' functions are all remote. I still
+	  can't figure out what does 'cp' stand for
+
+
+- How does it connect to the CnC ?
+
+- CnC communication protocol
+	
+	55: 'SendData(fd, <error code>, ..., ...)' seems to use 0x37 (55) as error
+		code for functions.

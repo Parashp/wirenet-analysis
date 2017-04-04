@@ -1,0 +1,255 @@
+Function name                   Segment Start    Length   Locals   Arguments R F L S B T =
+-------------                   ------- -----    ------   ------   --------- - - - - - - -
+TerminateRunningOperations      .text   0804BFF0 00000060 0000000C 00000000  R . . . . . .
+ProcessData                     .text   0804C050 00000C47 0000283C 00000010  R . . . . T .
+IsDataSizeAllowed               .text   0804CC97 00000026 00000000 00000008  R . . . . . .
+IsCommandAllowed                .text   0804CCBD 0000001D 00000000 00000005  R . . . . . .
+_main                           .text   0804CCDA 00000139 00000C2C 0000000C  . . . . . T .
+writebyte                       .text   0804CE14 00000019 00000000 00000004  R . . . . . .
+writeword                       .text   0804CE2D 0000001C 00000004 00000004  R . . . . . .
+set_quant_table                 .text   0804CE49 00000054 00000010 0000000C  R . . . . . .
+set_DQTinfo                     .text   0804CE9D 00000052                    R . . . . . .
+set_DHTinfo                     .text   0804CEEF 000000D3                    R . . . . . .
+writebits                       .text   0804CFC2 00000086 00000010 00000004  R . . . . . .
+compute_Huffman_table           .text   0804D048 00000053 00000014 0000000C  R . . . . . .
+init_Huffman_tables             .text   0804D09B 00000057                    R . . . . . .
+precalculate_YCbCr_tables       .text   0804D0F2 0000009E 00000004 00000000  R . . . . . .
+prepare_quant_tables            .text   0804D190 00000091 00000058 00000000  R . . . . . .
+fdct_and_quantization           .text   0804D221 0000024D 0000011C 0000000C  R . . . . . .
+process_DU                      .text   0804D46E 0000016D 00000030 00000014  R . . . . . .
+load_data_units_from_RGB_buffer .text   0804D5DB 000000E5 00000020 00000006  R . . . . . .
+BitmapToJPEG                    .text   0804D6C0 0000095F 0000005C 00000015  R . . . . . .
+ResolveHost                     .text   0804E020 00000049 00000018 0000000C  R . . . . T .
+SetSocketOptions                .text   0804E069 00000060 0000001C 00000008  R . . . . T .
+HandleSocks4                    .text   0804E0C9 00000120 000000E0 0000000C  R . . . . T .
+HandleSocks4a                   .text   0804E1E9 0000013C 000000BC 0000000C  R . . . B T .
+HandleSocks5                    .text   0804E325 000001ED 0000004C 00000014  R . . . B T .
+HandleHTTPConnect               .text   0804E512 00000096 00000820 0000000C  R . . . . T .
+HandleProxy                     .text   0804E5A8 00000082 00000008 00000010  R . . . . T .
+SendData                        .text   0804E62A 000001FD 000000D8 00000010  R . . . . T .
+CloseSocket                     .text   0804E827 00000032 0000000C 00000004  R . . . . . .
+EstablishConnection             .text   0804E859 00000233 0000003C 00000008  R . . . . T .
+EstablishConnectionLoop         .text   0804EA8C 00000050 0000001C 00000000  R . . . . . .
+IsSocketReadable                .text   0804EADC 000000C6 000000AC 00000004  R . . . . T .
+ReadPacket                      .text   0804EBA2 0000003A 00000008 0000000C  R . . . . T .
+cpListDrives                    .text   0804EBDC 00000016 0000000C 00000004  R . . . . T .
+cpListFiles                     .text   0804EBF2 0000023C 000011CC 00000008  R . . . . T .
+cpSearchFiles                   .text   0804EE2E 00000278 0000329C 00000004  R . . . . T .
+cpExecuteFile                   .text   0804F0A6 00000056 0000001C 0000000C  R . . . . T .
+cpDeleteFile                    .text   0804F0FC 00000015 00000018 00000004  R . . . . T .
+cpRenameFile                    .text   0804F111 00000019 00000014 00000008  R . . . . T .
+cpFileExists                    .text   0804F12A 00000017 00000014 00000004  R . . . . T .
+cpDirectoryExists               .text   0804F141 00000031 00000074 00000004  R . . . . . .
+cpCopyFile                      .text   0804F172 00000109 00000034 00000004  R . . . . . .
+cpCopyFileEx                    .text   0804F27B 000000DF 00000034 00000008  R . . . . T .
+cpGetFileSize                   .text   0804F35A 0000002B 00000074 00000004  R . . . . . .
+cpMkDir                         .text   0804F385 00000015 00000014 00000004  R . . . . T .
+FindFile                        .text   0804F39A 00000101 00000088 00000014  R . . . . T .
+cpGetLocalFileName              .text   0804F49B 0000006A 0000110C 00000008  R . . . . T .
+cpGetLocalFilePath              .text   0804F505 00000043 00001014 00000008  R . . . . . .
+cpSleep                         .text   0804F548 00000011 00000000 00000004  R . . . . T .
+cpBeginThread                   .text   0804F559 00000023 0000001C 00000008  R . . . . T .
+ReleaseHeap                     .text   0804F57C 00000025 0000000C 00000004  R . . . . . .
+cpReadFileData                  .text   0804F5A1 000000F2 0000001C 00000008  R . . . . . .
+cpLoadLibrary                   .text   0804F693 00000012 00000014 00000004  R . . . . T .
+cpGetProcAddress                .text   0804F6A5 00000005                    R . . . . T .
+cpFreeLibrary                   .text   0804F6AA 0000000E 00000000 00000004  R . . . . . .
+SendDownloadStatus              .text   0804F6B8 0000006F 0000002C 00000008  R . . . . . .
+cpDownloadFile                  .text   0804F727 000002B9 0000084C 00000004  R . . . . . .
+FindSpace                       .text   0804F9E0 00000028 00000008 00000008  R . . . . . .
+cpListProcesses                 .text   0804FA08 0000039B 00004AD8 00000004  R . . . . T .
+cpKillProcess                   .text   0804FDA3 0000001F 00000018 00000004  R . . . . . .
+cpGetCurrentProcessId           .text   0804FDC2 00000005                    R . . . . T .
+BindShell                       .text   0804FDC8 000005C4 0000084C 00000004  R . . . B T .
+WriteCommand                    .text   0805038C 00000044 0000002C 00000004  R . . . B T .
+SaveXImageToBitmap              .text   080503D0 000001F5 0000008C 00000008  R . . . . . .
+CaptureScreen                   .text   080505C5 000000A8 00000038 0000000C  R . . . . T .
+CaptureScreenToJPEG             .text   0805066D 0000007F 00000030 0000000C  R . . . . . .
+cpScreenCapture                 .text   080506EC 000000C3 00000020 00000009  R . . . . T .
+cpKeyDown                       .text   080507AF 000000C4 00000068 00000004  R . . . . T .
+cpKeyUp                         .text   08050873 000000C4 00000068 00000004  R . . . . T .
+cpMouseDown                     .text   08050937 00000124 000000A0 00000005  R . . . . . .
+cpMouseUp                       .text   08050A5B 0000012C 000000A0 00000005  R . . . . . .
+cpMouseMove                     .text   08050B87 0000005F 00000028 00000004  R . . . . . .
+ExtractProfileName              .text   08050BE8 000000D0 00000834 0000000C  R . . . . . .
+FindMozillaLib                  .text   08050CB8 000000C2 0000101C 00000014  R . . . . . .
+CleanUpMozilla                  .text   08050D7A 00000024 00000008 00000004  R . . . . . .
+LoadMozillaLibs                 .text   08050D9E 0000013C 00004448 00000004  R . . . . . .
+GetMozillaProductPasswords      .text   08050EDA 0000062F 000026DC 00000004  R . . . . . .
+GetOperaWand                    .text   08051509 00000105 0000112C 00000004  R . . . . . .
+GetPidginPasswords              .text   0805160E 0000014C 00001228 00000000  R . . . . . .
+ReadVarint                      .text   0805175A 0000003B 0000000C 00000008  R . . . . . .
+ReadBigEndianWORD               .text   08051795 0000001A 00000004 00000004  R . . . . . .
+DecodeSQLitePayloadData         .text   080517AF 000001D9 00000C3C 0000000C  R . . . . . .
+GetSQLitePageId                 .text   08051988 000000E3 0000004C 00000010  R . . . . . .
+GetLoginDataPath                .text   08051A6B 00000061 00000008 0000000C  R . . . . T .
+DecryptLoginData                .text   08051ACC 000001A3 0000005C 00000008  R . . . . . .
+GetGoogleChromePasswords        .text   08051C6F 00000038 00001110 00000000  R . . . . . .
+GetChromiumPasswords            .text   08051CA7 00000038 00001110 00000000  R . . . . . .
+StrCopy                         .text   08051CE0 0000003B 00000008 0000000C  R . . . . . .
+StrConcatenate                  .text   08051D1B 00000064 0000000E 0000000C  R . . . . . .
+StrPosition                     .text   08051D7F 00000061 0000000E 0000000C  R . . . . . .
+StrToInt                        .text   08051DE0 00000052 00000010 00000004  R . . . . . .
+StrToInt64                      .text   08051E32 000000BB 0000002C 00000004  R . . . . . .
+StrTrim                         .text   08051EED 00000042 00000004 00000004  R . . . . . .
+aStrConcatenate                 .text   08051F2F 00000119 0000002C 00000011  R . . . . . .
+StrNCompare                     .text   08052048 00000024 00000008 0000000C  R . . . . . .
+IsInteger                       .text   0805206C 00000023 00000000 00000004  R . . . . . .
+IsSpace                         .text   0805208F 00000009 00000000 00000001  R . . . . . .
+CharToUpper                     .text   08052098 00000010 00000000 00000001  R . . . . . .
+WildcardCompare                 .text   080520A8 000000A6 00000020 00000008  R . . . . . .
+CharToLower                     .text   0805214E 00000010 00000000 00000001  R . . . . . .
+CharCount                       .text   0805215E 00000024 00000004 00000008  R . . . . . .
+CharPosition                    .text   08052182 00000022 00000004 00000008  R . . . . . .
+StrSplit                        .text   080521A4 0000008F 00000018 00000014  R . . . . . .
+MemCompare                      .text   08052233 0000002E 00000008 0000000C  R . . . . . .
+strlenW                         .text   08052261 00000015 00000000 00000004  R . . . . . .
+ExtractFilePath                 .text   08052276 00000046 0000000C 0000000C  R . . . . . .
+ExtractFileName                 .text   080522BC 00000056 0000000C 0000000C  R . . . . . .
+cpGetComputerName               .text   08052314 00000039 0000000C 00000008  R . . . . T .
+cpGetUsername                   .text   0805234D 00000011 00000018 00000000  R . . . . . .
+ReadFile                        .text   0805235E 00000064 0000002C 0000000C  R . . . . T .
+cpGetOSVersion                  .text   080523C2 000000AB 00001120 00000008  R . . . . T .
+cpMemoryStatus                  .text   0805246D 0000006C 00000058 00000004  R . . . . . .
+cpSystemInformation             .text   080524D9 000001AD 0000216C 00000004  R . . . . T .
+UpdateHost                      .text   08052688 00000042 00000018 00000004  R . . . . . .
+TranslateMacros                 .text   080526CC 000001AD 00000068 00000004  R . . . . . .
+IsOptionEnabled                 .text   08052879 0000001E 00000018 00000004  R . . . . . .
+RunAsDaemon                     .text   08052897 00000064 0000001C 00000000  R . . . . . .
+UninstallHost                   .text   080528FB 00000080 00001118 00000000  R . . . . . .
+CloseMutexHandle                .text   0805297B 00000044 0000001C 00000000  R . . . . . .
+OpenMutexHandle                 .text   080529BF 00000099 00000044 00000000  R . . . . . .
+InstallHost                     .text   08052A58 00000394 0000552C 00000000  R . . . . . .
+DecryptSettings                 .text   08052DEC 000000DC 00000120 00000000  R . . . . . .
+ReadSettings                    .text   08052EC8 00000204 0000024C 00000000  R . . . . . .
+ConnectionMode                  .text   080530CC 00000011 00000018 00000000  R . . . . . .
+InitTransfersList               .text   080530E0 00000016                    R . . . . . .
+CloseTransfer                   .text   080530F6 00000037 0000000C 00000001  R . . . . . .
+CloseAllTransfers               .text   0805312D 00000020 0000000C 00000000  R . . . . . .
+IsTransferOpen                  .text   0805314D 0000001A 00000000 00000001  R . . . . . .
+TransferFile                    .text   08053167 000004BC 00001D5C 00000004  R . . . . T .
+FileUploadWrite                 .text   08053623 00000064 0000002C 0000000C  R . . . . T .
+EnumerateWindows                .text   08053688 000000F3 0000004C 00000010  R . . . . T .
+ListWindows                     .text   0805377B 00000067 00000028 00000004  R . . . . T .
+WindowOperation                 .text   080537E2 000000FB 00000088 00000008  R . . . . T .
+ChangeWindowTitle               .text   080538DD 000000DE 00000048 00000008  R . . . . T .
+ProcessWindowCommand            .text   080539BB 000000AF 0000011C 00000004  R . . . . . .
+RelayData                       .text   08053A6C 00000152 000010CC 00000008  R . . . . T .
+SendResponse                    .text   08053BBE 00000025 0000001C 00000008  R . . . . T .
+HandleReverseSocks              .text   08053BE3 0000020D 0000024C 00000004  R . . . . . .
+StartReverseSocks               .text   08053DF0 00000078 00000024 00000004  R . . . . T .
+aes_mul_manual                  .text   08053E68 00000027 00000000 00000005  R . . . . . .
+SubWord                         .text   08053E8F 00000044 00000000 00000004  R . . . . . .
+RotateWord                      .text   08053ED3 0000001F 00000000 00000004  R . . . . . .
+KeyExpansion                    .text   08053EF2 00000096 00000018 00000004  R . . . . . .
+SubBytes                        .text   08053F88 00000029 00000004 00000004  R . . . . . .
+ShiftRows                       .text   08053FB1 00000049 0000001C 00000004  R . . . . . .
+MixColumns                      .text   08053FFA 000001DA 00000034 00000004  R . . . . . .
+AddRoundKey                     .text   080541D4 00000044 00000010 00000008  R . . . . . .
+InverseShiftRows                .text   08054218 00000048 00000020 00000000  R . . . B . .
+InverseSubBytes                 .text   08054260 00000029 00000004 00000004  R . . . . . .
+InverseMixColumns               .text   08054289 000002AC 00000034 00000004  R . . . . . .
+InitAESTables                   .text   08054535 000000D5 00000010 00000000  R . . . . . .
+AESAllocateContext              .text   0805460A 0000006C 0000001C 00000008  R . . . . . .
+AESBlockEncrypt                 .text   08054676 00000097 00000010 0000000C  R . . . . . .
+AESBlockDecrypt                 .text   0805470D 00000095 00000010 0000000C  R . . . . . .
+AESCryptCFB                     .text   080547A2 000000C5 00000028 00000018  R . . . . . .
+AESFreeContext                  .text   08054867 00000025 0000000C 00000004  R . . . . . .
+RC4Setup                        .text   0805488C 0000007A 00000014 0000000C  R . . . . . .
+RC4Crypt                        .text   08054906 00000080 00000114 0000000C  R . . . . . .
+RotateLeft                      .text   08054988 00000020 00000004 00000005  R . . . . . .
+GenerateRandomData              .text   080549A8 0000004D 0000002C 00000008  R . . . . . .
+Calculate                       .text   080549F5 000000AE 00000030 0000000C  R . . . . . .
+SendAuthenticationPacket        .text   08054AA3 000000BF 000000A4 00000004  R . . . . . .
+ParseAuthenticationPacket       .text   08054B62 0000009D 0000003C 0000000C  R . . . . T .
+SeedRandom                      .text   08054C00 00000023 00000000 00000004  R . . . . . .
+GetRandom                       .text   08054C23 00000039                    R . . . . . .
+RandomRange                     .text   08054C5C 0000001A 00000004 00000008  R . . . . . .
+KeyLoggerEncode                 .text   08054C78 00000020 00000004 00000008  R . . . . . .
+sub_8054C98                     .text   08054C98 000000BD 00000008 00000000  R . . . . . .
+LogKey                          .text   08054D55 0000048E 0000018C 00000008  R . . . . T .
+LoadKeyLoggerAPI                .text   080551E3 0000030A 00002218 00000000  R . . . . . .
+cpStartKeyLogger                .text   080554ED 000002D8 0000011C 00000000  R . . . . T .
+cpGetLog                        .text   080557C5 000000C6 00000028 00000004  R . . . . T .
+cpClearLog                      .text   0805588B 00000026 00000018 00000000  R . . . . . .
+sub_80558B4                     .text   080558B4 00000003                    R . . . . T .
+IsX11LibAPILoaded               .text   080558B7 00000442 0000221C 00000004  R . . . . . .
+CloseX11Connection              .text   08055CF9 00000025 0000000C 00000000  R . . . . . .
+cpLogonSessions                 .text   08055D20 000000E6 0000002C 00000000  R . . . B . .
+sub_8055E10                     .text   08055E10 00000032 00000014 00000008  R . . . B . .
+sub_8055E42                     .text   08055E42 00000004 00000000 00000000  R . . . . . .
+sub_8055E50                     .text   08055E50 00000032 00000014 00000008  R . . . B . .
+setsockopt                      extern  0805C2A4 00000004                    R . . . . T .
+pthread_mutex_unlock            extern  0805C2A8 00000004                    R . . . . T .
+__snprintf_chk                  extern  0805C2AC 00000004                    R . . . . . .
+strstr                          extern  0805C2B0 00000004                    R . . . . T .
+strcmp                          extern  0805C2B4 00000004                    R . . . . T .
+read                            extern  0805C2B8 00000004                    R . . . . T .
+dup                             extern  0805C2BC 00000004                    R . . . . T .
+free                            extern  0805C2C0 00000004                    R . . . . T .
+fgets                           extern  0805C2C4 00000004                    R . . . . T .
+fclose                          extern  0805C2C8 00000004                    R . . . . T .
+time                            extern  0805C2CC 00000004                    R . . . . T .
+select                          extern  0805C2D0 00000004                    R . . . . T .
+chdir                           extern  0805C2D4 00000004                    R . . . . T .
+endutxent                       extern  0805C2D8 00000004                    R . . . . T .
+__stack_chk_fail                extern  0805C2DC 00000004                    . . . . . . .
+execlp                          extern  0805C2E0 00000004                    R . . . . T .
+dlclose                         extern  0805C2E4 00000004                    R . . . . T .
+sysconf                         extern  0805C2E8 00000004                    R . . . . T .
+pthread_mutex_lock              extern  0805C2EC 00000004                    R . . . . T .
+readlink                        extern  0805C2F0 00000004                    R . . . . T .
+fseek                           extern  0805C2F4 00000004                    R . . . . T .
+fopen64                         extern  0805C2F8 00000004                    R . . . . . .
+fwrite                          extern  0805C2FC 00000004                    R . . . . T .
+waitpid                         extern  0805C300 00000004                    R . . . . T .
+usleep                          extern  0805C304 00000004                    R . . . . T .
+fread                           extern  0805C308 00000004                    R . . . . T .
+getpid                          extern  0805C30C 00000004                    R . . . . T .
+gethostname                     extern  0805C310 00000004                    R . . . . T .
+getenv                          extern  0805C314 00000004                    R . . . . T .
+__asprintf_chk                  extern  0805C318 00000004                    R . . . . . .
+realloc                         extern  0805C31C 00000004                    R . . . . T .
+malloc                          extern  0805C320 00000004                    R . . . . T .
+sysinfo                         extern  0805C324 00000004                    R . . . . T .
+__memcpy_chk                    extern  0805C328 00000004                    R . . . . . .
+getutxent                       extern  0805C32C 00000004                    R . . . . T .
+exit                            extern  0805C330 00000004                    . . . . . T .
+kill                            extern  0805C334 00000004                    R . . . . T .
+setsid                          extern  0805C338 00000004                    R . . . . T .
+localtime                       extern  0805C33C 00000004                    R . . . . T .
+rename                          extern  0805C340 00000004                    R . . . . T .
+write                           extern  0805C344 00000004                    R . . . . T .
+open64                          extern  0805C348 00000004                    R . . . . . .
+fcntl                           extern  0805C34C 00000004                    R . . . . T .
+dlsym                           extern  0805C350 00000004                    R . . . . T .
+ftell                           extern  0805C354 00000004                    R . . . . T .
+gmtime                          extern  0805C358 00000004                    R . . . . T .
+mkdir                           extern  0805C35C 00000004                    R . . . . T .
+snprintf                        extern  0805C360 00000004                    R . . . . T .
+__errno_location                extern  0805C364 00000004                    R . . . . T .
+execl                           extern  0805C368 00000004                    R . . . . T .
+ldiv                            extern  0805C36C 00000004                    R . . . . T .
+pipe                            extern  0805C370 00000004                    R . . . . T .
+access                          extern  0805C374 00000004                    R . . . . T .
+fork                            extern  0805C378 00000004                    R . . . . T .
+sscanf                          extern  0805C37C 00000004                    R . . . . T .
+gmtime_r                        extern  0805C380 00000004                    R . . . . T .
+setutxent                       extern  0805C384 00000004                    R . . . . T .
+remove                          extern  0805C388 00000004                    R . . . . T .
+readdir64                       extern  0805C38C 00000004                    R . . . . . .
+dlopen                          extern  0805C390 00000004                    R . . . . T .
+socket                          extern  0805C394 00000004                    R . . . . T .
+pthread_create                  extern  0805C398 00000004                    R . . . . T .
+chmod                           extern  0805C39C 00000004                    R . . . . T .
+__xstat64                       extern  0805C3A0 00000004                    R . . . . . .
+umask                           extern  0805C3A4 00000004                    R . . . . T .
+gethostbyname                   extern  0805C3A8 00000004                    R . . . . T .
+shutdown                        extern  0805C3AC 00000004                    R . . . . T .
+connect                         extern  0805C3B0 00000004                    R . . . . T .
+__lxstat64                      extern  0805C3B4 00000004                    R . . . . . .
+recv                            extern  0805C3B8 00000004                    R . . . . T .
+close                           extern  0805C3BC 00000004                    R . . . . T .
+closedir                        extern  0805C3C0 00000004                    R . . . . T .
+opendir                         extern  0805C3C4 00000004                    R . . . . T .
+send                            extern  0805C3C8 00000004                    R . . . . T .
