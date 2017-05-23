@@ -30,4 +30,3 @@ for cipher in encrypted:
   data = file_handle.read(cipher['len'])
   val = rc4.decrypt(data).split('\x00')[0]
   print "%s: %s" % (cipher['name'], val)
-
