@@ -20,6 +20,11 @@ private rule wirenet_strings {
         $seamonkey = "/.mozilla/seamonkey/"
 
         // Windows paths
+        $win_firefox = "\\Mozilla\\Firefox"
+        $win_thunderbird = "\\Thunderbird"
+        $win_seamonkey = "\\Mozilla\\SeaMonkey"
+        $win_old_opera = "\\Roaming\\Opera\\Opera\\profile\\"
+        $win_new_opera = "\\Roaming\\Opera Software\\Opera Stable\\"
 
         // OSX paths
 
@@ -56,13 +61,12 @@ private rule wirenet_strings {
         //      [*] some of the firefox related things have to match
         //      [*] other mozilla / chrome products should be included
         //      [*]
-        any of ($test_packet, $rc4_key, $startup_config) or any of ($firefox_db, $new_ff_db, $master_key) and (any of ( $thunderbird_path, $seamonkey ) or 7 of ( $key* ))
+        any of ($test_packet, $rc4_key, $startup_config) or (any of ($firefox_db, $new_ff_db, $master_key) or any of ($win_*)) and (any of ( $thunderbird_path, $seamonkey ) or 7 of ( $key* ))
 }
 
 rule linux_wirenet {
 
     meta:
-        author = "shxdow"
         description = "Cross-platform banking trojan"
         md5 = "9a0e765eecc5433af3dc726206ecc56e"
         sha1 = "5996d02c142588b6c1ed850e461845458bd94d17"
