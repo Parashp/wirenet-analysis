@@ -77,12 +77,12 @@ int main (int argc, char **argv, char **envp) {
 	}
 }
 
-if ( rcv = ReadPacket(v5, &v10, v4) ) {
+if ( rcv = ReadPacket(..., ..., ...) ) {
 	if ( rcv <= 3073 ) {
-		if ( IsCommandAllowed(fd, v10) ) {
+		if ( IsCommandAllowed(fd, ...) ) {
 			ProcessData(fd, ..., ..., &filename, ...);
 		} else {
-			cpSleep(0x2710u);
+			cpSleep(10000);
 			CloseSocket(&fd);
 		}
 	}
@@ -95,5 +95,5 @@ TerminateRunningOperations();
 do {
 	fd = EstablishConnectionLoop();
 	if ( !SendAuthenticationPacket(&fd) )
-		cpSleep(0x2710u);
+		cpSleep(10000);
 } while ( fd == -1 )
